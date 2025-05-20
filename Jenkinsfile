@@ -13,8 +13,8 @@ pipeline {
                 sh 'sudo systemctl restart apache2'
             }
         }
+        */
     }
-*/
     post {
         success {
             echo 'Déploiement HTML effectué et Apache redémarré.'
