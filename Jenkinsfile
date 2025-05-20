@@ -2,26 +2,34 @@ pipeline {
     agent any
 
     stages {
+        stage('Cloner le dépôt') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sionra/diginamic_jenkins.git'
+            }
+        }
+
         stage('Copier index.html') {
             steps {
-                bat 'copy index.html /var/www/html/index.html'
+                bat '''
+                    if not exist C:\\www\\html mkdir C:\\www\\html
+                    copy index.html C:\\www\\html\\index.html /Y
+                '''
             }
         }
-/*
-        stage('Redémarrer Apache2') {
+
+        stage('Afficher un message') {
             steps {
-                sh 'sudo systemctl restart apache2'
+                echo 'Déploiement de index.html terminé.'
             }
         }
-        */
     }
+
     post {
         success {
-            echo 'Déploiement HTML effectué et Apache redémarré.'
+            echo '✅ Déploiement réussi.'
         }
         failure {
-            echo 'Une erreur est survenue pendant le déploiement.'
+            echo '❌ Une erreur est survenue.'
         }
     }
 }
- 
