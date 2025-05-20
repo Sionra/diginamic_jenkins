@@ -7,14 +7,14 @@ pipeline {
                 bat 'copy index.html /var/www/html/index.html'
             }
         }
-
+/*
         stage('Redémarrer Apache2') {
             steps {
                 sh 'sudo systemctl restart apache2'
             }
         }
     }
-
+*/
     post {
         success {
             echo 'Déploiement HTML effectué et Apache redémarré.'
